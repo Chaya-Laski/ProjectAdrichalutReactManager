@@ -1,0 +1,86 @@
+
+/* עמוד */
+.page {
+  padding: 20px;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* כותרת */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* טבלה */
+.table {
+  width: 100%;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.table th {
+  background: #f1f5f9;
+  padding: 12px;
+  text-align: left;
+}
+
+.table td {
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+/* כפתורים */
+.primary-btn {
+  background: #14b8a6;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  margin-right: 5px;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* מודל */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-card {
+  background: white;
+  padding: 20px;
+  width: 420px;
+  border-radius: 14px;
+}
+
+.modal-card input {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}

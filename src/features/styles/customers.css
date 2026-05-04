@@ -1,0 +1,113 @@
+/* /* ===== מבנה כללי ===== */
+.page-container {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* ===== סינון ===== */
+.filter-input {
+  width: 250px;
+  padding: 8px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* ===== טבלה ===== */
+.table {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table th {
+  background: #f8fafc;
+  padding: 12px;
+  text-align: left;
+}
+
+.table td {
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+/* ===== כפתורים ===== */
+button {
+  margin: 3px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #14b8a6;
+  color: white;
+}
+
+button.delete {
+  background: #ef4444;
+}
+
+button.secondary {
+  background: #64748b;
+}
+
+button:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+  transition: 0.2s;
+}
+
+/* ===== מודאל (רקע מטושטש) ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== תוכן מודאל ===== */
+.modal-content {
+  background: white;
+  padding: 25px;
+  width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ===== מודאל מחיקה ===== */
+.modal-content.danger {
+  border-top: 5px solid #ef4444;
+}
+
+/* ===== פעולות במודל ===== */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ===== אינפוטים ===== */
+.modal-content input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+/* ===== שליחת מייל ===== */
+.modal-content textarea {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}

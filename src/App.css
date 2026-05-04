@@ -1,0 +1,123 @@
+/* ===== בסיס ===== */
+.app {
+  font-family: Arial;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* ===== NAV ===== */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0f172a;
+  padding: 16px 24px;
+  color: white;
+}
+
+.nav-logo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #14b8a6;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  background: #14b8a6;
+  color: #0f172a;
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(135deg, #0f172a, #1f2937, #14b8a6);
+  color: white;
+  padding: 70px 20px;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.hero-content p {
+  font-size: 16px;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* לוגו placeholder */
+.logo-placeholder {
+  width: 140px;
+  height: 140px;
+  border: 2px dashed #14b8a6;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: #14b8a6;
+}
+
+/* כפתורים */
+.hero-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid #14b8a6;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #14b8a6;
+  color: #0f172a;
+}
+
+.primary {
+  background: #14b8a6;
+  color: #0f172a;
+}
+
+/* ===== CARDS ===== */
+.cards {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  width: 240px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border-top: 3px solid #14b8a6;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
