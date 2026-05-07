@@ -18,9 +18,11 @@ export const addCustomer = async (data) => {
   try {
     const response = await api.post("/Customers", data);
     console.log("הוספת לקוח");
-    
     console.log(response.data);
-    
+
+    //לצורך הריפרוש
+    response = await api.get("/Customers");  
+    return response.data; // מחזירים את התוצאה
     return response.data;
   } catch (error) {
     console.error("Error adding customer:", error);
@@ -32,7 +34,6 @@ export const addCustomer = async (data) => {
 export const updateCustomer = async (data) => {
   try {
     console.log(data);
-    
     const response = await api.put("/Customers", data);
     console.log("עדכון לקוח");
     

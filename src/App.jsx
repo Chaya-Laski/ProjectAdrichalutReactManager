@@ -6,8 +6,6 @@ import ClientsPage from "./features/customers/CustomersPage";
 import MeetingsPage from "./features/meetings/MeetingsPage";
 import InspirationsPage from "./features/inspirations/InspirationsPage";
 import WeeklyPage from "./features/weekly/WeeklyPage";
-// import CalendarPage from "./features/calendar/CalendarPage";
-import CalendarPage_1 from "./new/calendar/CalendarPage_1";
 import CalendarPage from "./features/calendar/CalendarPage";
 
 
@@ -88,7 +86,6 @@ function App() {
           <Link to="/inspirations">השראות</Link>
           <Link to="/weekly">זמינות</Link>
           <Link to="/calendar">לוח זמנים</Link>
-          <Link to="/calendar_1">לוח new</Link>
         </div>
 
       </nav>
@@ -101,8 +98,6 @@ function App() {
         <Route path="/inspirations" element={<InspirationsPage />} />
         <Route path="/weekly" element={<WeeklyPage />} />
         <Route path="/calendar" element={<CalendarPage />} />
-        {/* <Route path="/CalendarGrid" element={<CalendarGrid />} /> */}
-        <Route path="/calendar_1" element={<CalendarPage_1 />} />
       </Routes>
 
     </div>

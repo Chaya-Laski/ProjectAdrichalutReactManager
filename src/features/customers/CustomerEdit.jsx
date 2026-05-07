@@ -88,7 +88,7 @@
 // }
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { editCustomer } from "../../slices/SliceCustomers";
+import { editCustomer, fetchCustomers } from "../../slices/SliceCustomers";
 import "../styles/customers.css";
 /**
  * קומפוננטה לעריכת לקוח
@@ -99,6 +99,7 @@ export default function CustomerEdit({ item, onClose }) {
 
   const save = async () => {
     await dispatch(editCustomer(form));
+    await  dispatch(fetchCustomers());
     onClose();
   };
 

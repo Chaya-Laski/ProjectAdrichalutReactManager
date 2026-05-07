@@ -87,7 +87,7 @@
 // }
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createCustomer } from "../../slices/SliceCustomers";
+import { createCustomer, fetchCustomers } from "../../slices/SliceCustomers";
 import "../styles/customers.css";
 
 /**
@@ -107,9 +107,10 @@ export default function CustomerAdd({ onClose }) {
 
   const save = async () => {
     await dispatch(createCustomer(form));
+    await dispatch(fetchCustomers());
     onClose();
   };
-
+ 
   return (
     <div className="modal">
       <div className="modal-content">
