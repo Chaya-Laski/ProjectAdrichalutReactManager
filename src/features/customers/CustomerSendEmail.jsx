@@ -24,7 +24,12 @@ console.log(customer.email);
       });
 
       onClose();
-    } finally {
+    }
+    catch (err) {
+      console.error("Error sending email:", err);
+      alert("אירעה שגיאה בשליחת המייל. אנא נסה שוב.");
+    }
+    finally {
       setLoading(false);
     }
   };

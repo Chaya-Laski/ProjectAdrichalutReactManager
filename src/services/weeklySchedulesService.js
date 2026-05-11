@@ -7,7 +7,7 @@ export const getSchedules = async () => {
     const response = await api.get("/WeeklySchedules");
     return response.data; // מחזירים את התוצאה של הלוח השבועי
   } catch (error) {
-    console.error("Error fetching schedules:", error);
+    console.error("Error fetching schedules:", error.response?.status, error.response?.data || error.message);
     throw error; // זורקים את השגיאה למעלה
   }
 };

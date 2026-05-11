@@ -1,19 +1,19 @@
 
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   getMeetings,
   updateMeeting
 } from "../../services/meetingsService";
 
-import MeetingAdd from "../meetings/MeetingAdd";
 import "../styles/calendar.css";
 export default function Calendar() {
+  const navigate = useNavigate();
 
   const [currentDate, setCurrentDate] = useState(new Date());
   const [meetings, setMeetings] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedMeetings, setSelectedMeetings] = useState([]);
-  const [showAdd, setShowAdd] = useState(false);
 
   // טעינת פגישות
   const loadMeetings = async () => {
@@ -138,7 +138,7 @@ export default function Calendar() {
               </div>
             ))}
 
-            <button onClick={() => setShowAdd(true)}>
+            <button onClick={() => navigate("/meetings/add")}>
               הוסף פגישה
             </button>
 
@@ -148,14 +148,6 @@ export default function Calendar() {
 
           </div>
         </div>
-      )}
-
-      {/* הוספת פגישה */}
-      {showAdd && (
-        <MeetingAdd
-          onClose={() => setShowAdd(false)}
-          onSaved={loadMeetings}
-        />
       )}
 
     </div>

@@ -4,6 +4,7 @@ import { Link, Route, Routes } from "react-router-dom";
 
 import ClientsPage from "./features/customers/CustomersPage";
 import MeetingsPage from "./features/meetings/MeetingsPage";
+import MeetingAddPage from "./features/meetings/MeetingAddPage";
 import InspirationsPage from "./features/inspirations/InspirationsPage";
 import WeeklyPage from "./features/weekly/WeeklyPage";
 import CalendarPage from "./features/calendar/CalendarPage";
@@ -95,6 +96,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/clients" element={<ClientsPage />} />
         <Route path="/meetings" element={<MeetingsPage />} />
+        <Route path="/meetings/add" element={<MeetingAddPage />} />
         <Route path="/inspirations" element={<InspirationsPage />} />
         <Route path="/weekly" element={<WeeklyPage />} />
         <Route path="/calendar" element={<CalendarPage />} />
