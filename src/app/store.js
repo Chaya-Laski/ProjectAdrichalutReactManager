@@ -16,7 +16,7 @@
 //   }
 // });
 import { configureStore } from "@reduxjs/toolkit";
-import customersReducer from "../slices/SliceCustomers";
+import customersReducer from "../Slices/SliceCustomers";
 const store = configureStore({
   reducer: {
     customers: customersReducer

@@ -24,7 +24,7 @@
 // }
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeCustomer } from "../../slices/SliceCustomers";
+import { removeCustomer } from "../../Slices/SliceCustomers";
 import "../styles/customers.css";
 /**
  * קומפוננטת אישור מחיקה

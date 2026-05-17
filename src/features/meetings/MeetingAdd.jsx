@@ -640,17 +640,17 @@ export default function MeetingAdd({ onClose, onSaved }) {
 
   /* ---------------- generate slots ---------------- */
 
-  useEffect(() => {
-    const result = generateAvailableSlots({
-      date: form.date,
-      schedules,
-      meetings
-    });
+  // useEffect(() => {
+  //   const result = generateAvailableSlots({
+  //     date: form.date,
+  //     schedules,
+  //     meetings
+  //   });
 
-    setSlots(result);
-    setSelectedSlot(null);
+  //   setSlots(result);
+  //   setSelectedSlot(null);
 
-  }, [form.date, schedules, meetings]);
+  // }, [form.date, schedules, meetings]);
 
   /* ---------------- save ---------------- */
 

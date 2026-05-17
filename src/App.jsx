@@ -7,6 +7,8 @@ import MeetingsPage from "./features/meetings/MeetingsPage";
 import InspirationsPage from "./features/inspirations/InspirationsPage";
 import WeeklyPage from "./features/weekly/WeeklyPage";
 import CalendarPage from "./features/calendar/CalendarPage";
+import { Ai } from "./features/Ai";
+
 
 
 /* ===== דף הבית (בתוך App) ===== */
@@ -37,7 +39,7 @@ function Home() {
             <Link to="/inspirations" className="btn">השראות</Link>
             <Link to="/weekly" className="btn">זמינות שבועית</Link>
             <Link to="/calendar" className="btn">לוח זמנים</Link>
-            
+            <Link to="/ai" className="btn">בינה</Link>
           </div>
 
         </div>
@@ -86,6 +88,7 @@ function App() {
           <Link to="/inspirations">השראות</Link>
           <Link to="/weekly">זמינות</Link>
           <Link to="/calendar">לוח זמנים</Link>
+          <Link to="/ai">בינה</Link>
         </div>
 
       </nav>
@@ -98,6 +101,7 @@ function App() {
         <Route path="/inspirations" element={<InspirationsPage />} />
         <Route path="/weekly" element={<WeeklyPage />} />
         <Route path="/calendar" element={<CalendarPage />} />
+        <Route path="/ai" element={<Ai />} />
       </Routes>
 
     </div>

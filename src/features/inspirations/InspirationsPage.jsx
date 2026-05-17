@@ -1,70 +1,40 @@
 
-import React, { useEffect, useState } from "react";
-import {
-  getInspirations,
-  deleteInspiration
-} from "../../services/inspirationsService";
-
-import InspirationsTable from "./InspirationsTable";
+import React, { useState, useEffect } from "react";
+import InspirationsGallery from "./InspirationsGallery";
 import InspirationAdd from "./InspirationAdd";
 import InspirationEdit from "./InspirationEdit";
-
+import { getInspirations, deleteInspiration } from "../../services/inspirationsService";
 import "../styles/inspirations.css";
 
 export default function InspirationsPage() {
-
   const [data, setData] = useState([]);
   const [addOpen, setAddOpen] = useState(false);
   const [editItem, setEditItem] = useState(null);
+  const [filterStyle, setFilterStyle] = useState("");
 
-  const load = async () => {
-    const res = await getInspirations();
-    setData(res);
-  };
+  const load = async () => setData(await getInspirations());
+  useEffect(() => { load(); }, []);
 
-  useEffect(() => {
-    load();
-  }, []);
+  const handleDelete = async id => { await deleteInspiration(id); load(); };
 
-  // 🔴 מחיקה
-  const handleDelete = async (id) => {
-    await deleteInspiration(id);
-    load();
-  };
+  const filteredData = data.filter(item => !filterStyle || item.style === filterStyle);
 
   return (
     <div className="page">
-
       <div className="page-header">
         <h1>השראות</h1>
-
-        <button className="primary-btn"
-          onClick={() => setAddOpen(true)}>
-          + הוספת השראה
-        </button>
+        <select onChange={e => setFilterStyle(e.target.value)}>
+          <option value="">הכל</option>
+          <option value="עתיק">עתיק</option>
+          <option value="כפרי">כפרי</option>
+          <option value="מודרני">מודרני</option>
+        </select>
+        <button className="primary-btn" onClick={() => setAddOpen(true)}>+ הוספת השראה</button>
       </div>
 
-      <InspirationsTable
-        data={data}
-        onEdit={setEditItem}
-        onDelete={handleDelete}
-      />
-
-      {addOpen && (
-        <InspirationAdd
-          onClose={() => setAddOpen(false)}
-          onSaved={load}
-        />
-      )}
-
-      {editItem && (
-        <InspirationEdit
-          item={editItem}
-          onClose={() => setEditItem(null)}
-          onSaved={load}
-        />
-      )}
-
+      <InspirationsGallery data={filteredData} onEdit={setEditItem} onDelete={handleDelete} />
+      {addOpen && <InspirationAdd onClose={() => setAddOpen(false)} onSaved={load} />}
+      {editItem && <InspirationEdit item={editItem} onClose={() => setEditItem(null)} onSaved={load} />}
     </div>
   );
 }

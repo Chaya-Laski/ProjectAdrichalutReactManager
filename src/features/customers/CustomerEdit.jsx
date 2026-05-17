@@ -88,7 +88,7 @@
 // }
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { editCustomer, fetchCustomers } from "../../slices/SliceCustomers";
+import { editCustomer, fetchCustomers } from "../../Slices/SliceCustomers";
 import "../styles/customers.css";
 /**
  * קומפוננטה לעריכת לקוח

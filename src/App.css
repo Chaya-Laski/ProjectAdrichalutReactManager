@@ -12,7 +12,7 @@
   align-items: center;
   background: #0f172a;
   padding: 16px 24px;
-  color: white;
+  color: rgba(128, 128, 128, 0.651);
 }
 
 .nav-logo {

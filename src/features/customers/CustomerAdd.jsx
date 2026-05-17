@@ -87,7 +87,7 @@
 // }
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createCustomer, fetchCustomers } from "../../slices/SliceCustomers";
+import { createCustomer, fetchCustomers } from "../../Slices/SliceCustomers";
 import "../styles/customers.css";
 
 /**
