@@ -14,7 +14,7 @@ export const getMeetings = async () => {
     return response.data;
      // מחזירים את התוצאה של הפגישות
   } catch (error) {
-    console.error("Error fetching meetings:", error);
+    console.error("Error fetching meetings:", error.response?.status, error.response?.data || error.message);
     throw error; // זורקים את השגיאה למעלה
   }
 };

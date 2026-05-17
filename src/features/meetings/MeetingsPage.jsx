@@ -1,20 +1,20 @@
 
 
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   getMeetings,
   deleteMeeting
 } from "../../services/meetingsService";
 
 import MeetingsTable from "./MeetingsTable";
-import MeetingAdd from "./MeetingAdd";
 import MeetingEdit from "./MeetingEdit";
 import "../styles/meetings.css";
 
 export default function MeetingsPage() {
+  const navigate = useNavigate();
 
   const [data, setData] = useState([]);
-  const [addOpen, setAddOpen] = useState(false);
   const [editItem, setEditItem] = useState(null);
 
   const load = async () => {
@@ -42,8 +42,10 @@ export default function MeetingsPage() {
       <div className="page-header">
         <h1>פגישות</h1>
 
-        <button className="primary-btn"
-          onClick={() => setAddOpen(true)}>
+        <button
+          className="primary-btn"
+          onClick={() => navigate("/meetings/add")}
+        >
           + הוספת פגישה
         </button>
       </div>
@@ -52,13 +54,6 @@ export default function MeetingsPage() {
         onEdit={setEditItem}
         onDelete={handleDelete}
       />
-
-      {addOpen && (
-        <MeetingAdd
-          onClose={() => setAddOpen(false)}
-          onSaved={load}
-        />
-      )}
 
       {editItem && (
         <MeetingEdit
@@ -71,3 +66,4 @@ export default function MeetingsPage() {
     </div>
   );
 }
+
