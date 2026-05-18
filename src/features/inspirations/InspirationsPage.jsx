@@ -17,17 +17,20 @@ export default function InspirationsPage() {
 
   const handleDelete = async id => { await deleteInspiration(id); load(); };
 
+  // יצירת רשימת סגנונות ייחודית מהנתונים
+  const uniqueStyles = Array.from(new Set(data.map(item => item.style))).filter(s => s);
+
   const filteredData = data.filter(item => !filterStyle || item.style === filterStyle);
 
   return (
     <div className="page">
       <div className="page-header">
         <h1>השראות</h1>
-        <select onChange={e => setFilterStyle(e.target.value)}>
+        <select value={filterStyle} onChange={e => setFilterStyle(e.target.value)}>
           <option value="">הכל</option>
-          <option value="עתיק">עתיק</option>
-          <option value="כפרי">כפרי</option>
-          <option value="מודרני">מודרני</option>
+          {uniqueStyles.map((style, idx) => (
+            <option key={idx} value={style}>{style}</option>
+          ))}
         </select>
         <button className="primary-btn" onClick={() => setAddOpen(true)}>+ הוספת השראה</button>
       </div>
