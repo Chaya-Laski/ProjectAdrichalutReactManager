@@ -93,7 +93,7 @@
 import React, { useState } from "react";
 import { addInspiration } from "../../services/inspirationsService";
 
-const BASE_URL = "https://localhost:7110";
+const BASE_URL = process.env.REACT_APP_SERVER_URL || "https://localhost:5000";
 
 export default function InspirationAdd({ onClose, onSaved }) {
   const [form, setForm] = useState({

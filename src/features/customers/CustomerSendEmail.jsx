@@ -11,13 +11,12 @@ export default function CustomerSendEmail({ customer, onClose }) {
   const [loading, setLoading] = useState(false);
 
   const send = async () => {
+    const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || "https://localhost:7110/api";
 
     try {
       setLoading(true);
-   
-console.log(customer);
-console.log(customer.email);
-      await axios.post("https://localhost:7110/api/email/send", {
+
+      await axios.post(`${apiBaseUrl}/email/send`, {
         to: customer.email,
         subject,
         body

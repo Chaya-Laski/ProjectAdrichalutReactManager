@@ -3,15 +3,18 @@ import { getSchedules } from "../../services/weeklySchedulesService";
 import { generateAvailableSlots } from "../scheduler/availabilityEngine";
 import { findNearestAvailableDate } from "../scheduler/availabilityHelpers";
 import CalendarSlots from "../calendar/CalendarSlots";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import "../styles/meetings.css";
-import { useSelector } from "react-redux";
+import { fetchCustomers } from "../../Slices/SliceCustomers";
 
 export default function MeetingAddPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const customerSelectRef = useRef(null);
 
-  const customers = useSelector((state) => state.customers.list);
+  const customers = useSelector((state) => state.customers.list || []);
 
   const [form, setForm] = useState({
     customerId: "",
@@ -31,6 +34,19 @@ export default function MeetingAddPage() {
   const [modeError, setModeError] = useState("");
   const [saveLoading, setSaveLoading] = useState(false);
   const [saveError, setSaveError] = useState("");
+  const [customerDropdownOpen, setCustomerDropdownOpen] = useState(false);
+  const [customerSearch, setCustomerSearch] = useState("");
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (customerSelectRef.current && !customerSelectRef.current.contains(event.target)) {
+        setCustomerDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -71,11 +87,14 @@ export default function MeetingAddPage() {
     };
 
     loadData();
+    if (!customers.length) {
+      dispatch(fetchCustomers());
+    }
 
     return () => {
       active = false;
     };
-  }, []);
+  }, [customers.length, dispatch]);
 
   useEffect(() => {
     if (mode !== "nearest") {
@@ -151,10 +170,21 @@ export default function MeetingAddPage() {
     navigate("/meetings");
   };
 
-  const handleCustomerChange = (event) => {
-   const selectedCustomerId = event.target.value;
-   setForm((prevForm) => ({ ...prevForm, customerId: selectedCustomerId }));
+  const handleCustomerSelect = (customerId) => {
+    setForm((prevForm) => ({ ...prevForm, customerId: String(customerId) }));
+    setCustomerDropdownOpen(false);
+    setCustomerSearch("");
   };
+
+  const filteredCustomers = customers.filter((customer) => {
+    const fullName = `${customer.firstName} ${customer.lastName}`.toLowerCase();
+    return fullName.includes(customerSearch.toLowerCase());
+  });
+
+  const selectedCustomer = customers.find(
+    (customer) => String(customer.customerId) === String(form.customerId)
+  );
+
   return (
     <div className="page meeting-add-page">
       <div className="page-header">
@@ -189,18 +219,48 @@ export default function MeetingAddPage() {
         <section className="form-section">
           <h2>פרטי הפגישה</h2>
           <div className="meeting-form-grid">
-            <div className="form-group">
+            <div className="form-group" ref={customerSelectRef}>
               <label htmlFor="customerId">
-                קוד לקוח *
+                לקוח *
               </label>
-              <input
-                id="customerId"
-                type="text"
-                value={form.customerId}
-                placeholder="הקלד קוד לקוח"
-                onChange={(e) => setForm({ ...form, customerId: e.target.value })}
-                className="form-input"
-              />
+              <button
+                type="button"
+                className="form-input custom-select-button"
+                onClick={() => setCustomerDropdownOpen((open) => !open)}
+              >
+                <span>
+                  {selectedCustomer
+                    ? `${selectedCustomer.firstName} ${selectedCustomer.lastName}`
+                    : "בחר לקוח"}
+                </span>
+                <span className="select-arrow">▾</span>
+              </button>
+
+              <div className={`custom-select-dropdown ${customerDropdownOpen ? "open" : ""}`}>
+                <input
+                  type="text"
+                  className="form-input custom-select-search"
+                  placeholder="חפש לקוח..."
+                  value={customerSearch}
+                  onChange={(e) => setCustomerSearch(e.target.value)}
+                />
+                <div className="custom-select-list">
+                  {filteredCustomers.length > 0 ? (
+                    filteredCustomers.map((customer) => (
+                      <button
+                        key={customer.customerId}
+                        type="button"
+                        className={`custom-select-item ${String(customer.customerId) === String(form.customerId) ? "selected" : ""}`}
+                        onClick={() => handleCustomerSelect(customer.customerId)}
+                      >
+                        {customer.firstName} {customer.lastName}
+                      </button>
+                    ))
+                  ) : (
+                    <div className="custom-select-empty">לא נמצאו לקוחות</div>
+                  )}
+                </div>
+              </div>
             </div>
 
             <div className="form-group">
@@ -308,7 +368,7 @@ export default function MeetingAddPage() {
             <p className="section-description">משך הפגישה: 90 דקות</p>
             {form.date && (
               <p className="date-info">
-                تاريخ: <strong>{form.date}</strong> • סלוטים זמינים: <strong>{slots.length}</strong>
+               <strong>{form.date}</strong> • סלוטים זמינים: <strong>{slots.length}</strong>
               </p>
             )}
           </div>

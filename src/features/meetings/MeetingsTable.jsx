@@ -1,51 +1,55 @@
+﻿import React from "react";
+import { Link } from "react-router-dom";
+import GenericTable from "../common/GenericTable";
+import "../styles/meetings.css";
 
-import React, { useEffect, useState } from "react";
-export default function MeetingsTable({ data = [], onEdit, onDelete }) {
-  // אם data לא הוא מערך, או שהוא ריק'
+export default function MeetingsTable({ data = [], onEdit, onDelete, onRefresh }) {
+  const columns = [
+    {
+      header: "לקוח",
+      field: "customerName",
+      sortable: true,
+      render: (row) => (
+        <Link
+          to="/clients"
+          state={{ selectedCustomerId: row.customerId }}
+          className="meeting-customer-link"
+        >
+          {row.customerName}
+        </Link>
+      ),
+    },
+    { header: "תאריך", field: "date", sortable: true },
+    { header: "משעה", field: "fromHour", sortable: true },
+    { header: "עד שעה", field: "toHour", sortable: true },
+    {
+      header: "סטטוס",
+      field: "status",
+      sortable: true,
+      render: (row) => (row.status ? "בוצע" : "ממתין"),
+    },
+  ];
 
-  if (!Array.isArray(data)) {
-    return <div>לא נמצאו פגישות</div>;
-  }
-  
+  const actions = [
+    { label: "עריכה", onClick: onEdit, className: "edit-btn" },
+    {
+      label: "מחיקה",
+      onClick: (row) => onDelete(row.meetingId),
+      className: "delete-btn",
+    },
+  ];
 
   return (
-    <table className="table fade-in">
-      <thead>
-        <tr>
-          <th>לקוח</th>
-          <th>תאריך</th>
-          {<th>משעה</th> }
-          { <th>עד שעה</th> }
-          <th>סטטוס</th>
-          <th>פעולות</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {data.length > 0 ? (
-          data.map((m) => (
-            <tr key={m.meetingId}>
-              <td>{m.customerName}</td>
-              <td>{m.date}</td>
-              { <td>{m.fromHour}</td> }
-              { <td>{m.toHour}</td> }
-              <td>{m.status ? "בוצע" : "ממתין"}</td>
-              <td>
-                <button className="edit-btn" onClick={() => onEdit(m)}>
-                  עריכה
-                </button>
-                <button className="delete-btn" onClick={() => onDelete(m.meetingId)}>
-                  מחיקה
-                </button>
-              </td>
-            </tr>
-          ))
-        ) : (
-          <tr>
-            <td colSpan="6">לא נמצאו פגישות</td>
-          </tr>
-        )}
-      </tbody>
-    </table>
+    <GenericTable
+      data={data}
+      columns={columns}
+      rowKey="meetingId"
+      filterable
+      searchFields={["customerName", "date", "fromHour", "toHour"]}
+      filterPlaceholder="חיפוש לפי שם לקוח או תאריך..."
+      onRefresh={onRefresh}
+      actions={actions}
+      emptyText="לא נמצאו פגישות"
+    />
   );
 }

@@ -37,7 +37,7 @@ export default function CalendarSlots({
             <span>🕐 {s.label || "אין שעה"}</span>
             {s.start !== undefined && s.end !== undefined && (
               <span style={{ fontSize: "12px", color: "#64748b" }}>
-                {Math.round((s.end - s.start) / 60)} דקות
+                {s.end - s.start} דקות
               </span>
             )}
           </div>

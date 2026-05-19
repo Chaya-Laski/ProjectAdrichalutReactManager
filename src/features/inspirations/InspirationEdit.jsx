@@ -180,7 +180,7 @@
 import React, { useState } from "react";
 import { updateInspiration } from "../../services/inspirationsService";
 
-const BASE_URL = "https://localhost:7110";
+const BASE_URL = process.env.REACT_APP_SERVER_URL || "https://localhost:7110";
 
 export default function InspirationEdit({ item, onClose, onSaved }) {
   const initialMain = item.imageUrl?.startsWith("http") ? item.imageUrl : `${BASE_URL}${item.imageUrl}`;

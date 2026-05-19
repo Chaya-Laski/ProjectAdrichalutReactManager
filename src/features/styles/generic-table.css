@@ -1,0 +1,195 @@
+.generic-table {
+  width: 100%;
+}
+
+.generic-table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.generic-table-search {
+  width: 100%;
+  max-width: 320px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #0f172a;
+}
+
+.generic-table-search:focus {
+  outline: none;
+  border-color: #14b8a6;
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.14);
+}
+
+.generic-table-refresh,
+.generic-table-action {
+  background: #14b8a6;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.generic-table-refresh:hover,
+.generic-table-action:hover {
+  background: #0f766e;
+}
+
+.generic-table-refresh:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+.refresh-icon {
+  font-size: 1.05em;
+}
+
+.generic-table-wrapper {
+  position: relative;
+}
+
+.generic-table-loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.generic-table-spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(20, 184, 166, 0.25);
+  border-top-color: #14b8a6;
+  border-radius: 50%;
+  animation: generic-table-spin 0.9s linear infinite;
+}
+
+@keyframes generic-table-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.generic-table-actions-cell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.table th.sortable:hover {
+  background: #e2e8f0;
+}
+
+.table th.sortable.active {
+  background: #dbeafe;
+}
+
+.sort-indicator {
+  margin-left: 8px;
+  font-size: 0.9em;
+  color: #475569;
+  opacity: 0.85;
+}
+
+.table th.sortable:not(.active) .sort-indicator {
+  opacity: 0.45;
+}
+
+.generic-table-empty-with-icon {
+display: flex;
+    flex-direction: column;
+  align-items: center;
+  justify-content: center;
+gap: 14px;
+    margin: 12px auto;
+    padding: 24px 16px;
+    max-width: 420px;
+    background: #eff6ff;
+    border: 1px dashed #bfdbfe;
+    border-radius: 18px;
+    color: #1e293b;
+}
+
+.empty-icon {
+  display: inline-flex;
+width: 48px;
+    height: 48px;
+  align-items: center;
+  justify-content: center;
+font-size: 1.7rem;
+    background: #dbeafe;
+    color: #0f172a;
+    border-radius: 50%;
+}
+
+.generic-table-empty {
+    padding: 24px;
+    color: #475569;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.table {
+  width: 100%;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+}
+
+.table th {
+  background: #f1f5f9;
+  cursor: default;
+}
+
+.table td {
+  border-top: 1px solid #eee;
+}
+
+.table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.table th.sortable:hover {
+  background: #e2e8f0;
+}
+
+.sort-indicator {
+  margin-left: 8px;
+  font-size: 0.85em;
+  color: #475569;
+}
+
+.generic-table-empty {
+  padding: 20px;
+  color: #475569;
+  text-align: center;
+}

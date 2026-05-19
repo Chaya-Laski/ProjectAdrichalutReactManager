@@ -54,7 +54,7 @@
 // }
 import React, { useState } from "react";
 
-const BASE_URL = "https://localhost:7110";
+const BASE_URL = process.env.REACT_APP_SERVER_URL || "https://localhost:7110";
 
 export default function InspirationsGallery({ data = [], onEdit, onDelete }) {
   if (!Array.isArray(data) || data.length === 0) return <div>לא נמצאו השראות</div>;

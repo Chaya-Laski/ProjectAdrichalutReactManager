@@ -1,46 +1,37 @@
-import React from "react";
+﻿import React from "react";
+import GenericTable from "../common/GenericTable";
+import "../styles/weekly.css";
 
-export default function WeeklyTable({ data = [], onEdit, onDelete }) {
-  // אם data לא הוא מערך, או שהוא ריק
-  if (!Array.isArray(data)) {
-    return <div>לא נמצאו נתונים לשבוע</div>;
-  }
-const days = ["ראשון","שני","שלישי","רביעי","חמישי","שישי","מוצאי שבת"];
+const days = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "מוצאי שבת"];
+
+export default function WeeklyTable({ data = [], onEdit, onDelete, onRefresh }) {
+  const columns = [
+    {
+      header: "יום",
+      field: "dayOfWeek",
+      sortable: true,
+      render: (row) => days[row.dayOfWeek] || "-",
+    },
+    { header: "משעה", field: "fromHour", sortable: true },
+    { header: "עד שעה", field: "toHour", sortable: true },
+  ];
+
+  const actions = [
+    { label: "עריכה", onClick: onEdit, className: "edit-btn" },
+    { label: "מחיקה", onClick: (row) => onDelete(row.id), className: "delete-btn" },
+  ];
+
   return (
-    <table className="table fade-in">
-      <thead>
-        <tr>
-          <th>יום</th>
-          <th>משעה</th>
-          <th>עד שעה</th>
-          <th>פעולות</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {data.length > 0 ? (
-          data.map((w) => (
-            <tr key={w.id}>
-              {/* <td>{w.dayOfWeek}</td> */}
-              <td>{days[w.dayOfWeek]}</td>
-              <td>{w.fromHour}</td>
-              <td>{w.toHour}</td>
-              <td>
-                <button className="edit-btn" onClick={() => onEdit(w)}>
-                  עריכה
-                </button>
-                <button className="delete-btn" onClick={() => onDelete(w.id)}>
-                  מחיקה
-                </button>
-              </td>
-            </tr>
-          ))
-        ) : (
-          <tr>
-            <td colSpan="4">לא נמצאו נתונים לשבוע</td>
-          </tr>
-        )}
-      </tbody>
-    </table>
+    <GenericTable
+      data={data}
+      columns={columns}
+      rowKey="id"
+      filterable
+      searchFields={["fromHour", "toHour", (row) => days[row.dayOfWeek]]}
+      filterPlaceholder="חיפוש זמינות..."
+      onRefresh={onRefresh}
+      actions={actions}
+      emptyText="לא נמצאו נתונים לשבוע"
+    />
   );
 }

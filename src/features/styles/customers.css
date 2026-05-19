@@ -27,6 +27,14 @@
   overflow: hidden;
 }
 
+.highlighted-row {
+  background: #ecfdef;
+  font-weight: 700;
+}
+
+.highlighted-row td {
+  font-weight: 700;
+}
 .table th {
   background: #f8fafc;
   padding: 12px;

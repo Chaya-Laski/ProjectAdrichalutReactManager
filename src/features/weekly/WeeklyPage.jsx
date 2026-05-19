@@ -55,6 +55,7 @@ export default function WeeklyPage() {
         data={data}
         onEdit={setEditItem}
         onDelete={handleDelete}
+        onRefresh={load}
       />
 
       {addOpen && (
